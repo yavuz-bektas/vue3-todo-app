@@ -48,6 +48,31 @@
     </section>
 
 
+    <section class="todo-list">
+      <h3>todo list</h3>
+      <div class="list">
+        <div
+          v-for="todo in todos_asc"
+          :key="todo.createdAt"
+          :class="`todo-item ${todo.done && 'done'}`"
+        >
+          <label>
+            <input type="checkbox" v-model="todo.done" />
+            <span :class="`bubble ${todo.category}`"></span>
+          </label>
+
+          <div class="todo-content">
+            <input type="text" v-model="todo.content" />
+          </div>
+
+          <div class="actions">
+            <button class="delete" @click="removeTodo(todo)">delete</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
 
 
 
@@ -67,6 +92,18 @@ const todos_asc = computed(() =>
   todos.value.sort((a, b) => {
     return b.createdAt - a.createdAt;
   })
+);
+
+watch(name, (newVal) => {
+  localStorage.setItem("name", newVal);
+});
+
+watch(
+  todos,
+  (newVal) => {
+    localStorage.setItem("todos", JSON.stringify(newVal));
+  },
+  { deep: true }
 );
 </script>
 
