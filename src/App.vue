@@ -105,6 +105,39 @@ watch(
   },
   { deep: true }
 );
+
+onMounted(() => {
+  const storedName = localStorage.getItem("name");
+  if (storedName) {
+    name.value = storedName;
+  }
+
+  todos.value = JSON.parse(localStorage.getItem("todos")) || [];
+});
+
+const addTodo = () => {
+  if (
+    input_content.value.trim() === "" ||
+    input_category.value === "" ||
+    input_category.value === null
+  ) {
+    return;
+  }
+
+  todos.value.push({
+    content: input_content.value,
+    category: input_category.value,
+    createdAt: Date.now(),
+    done: false,
+  });
+  input_content.value = "";
+  input_category.value = "";
+};
+
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter((t) => t !== todo);
+};
+
 </script>
 
 <style></style>
