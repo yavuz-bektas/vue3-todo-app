@@ -47,7 +47,6 @@
       </form>
     </section>
 
-
     <section class="todo-list">
       <h3>todo list</h3>
       <div class="list">
@@ -71,12 +70,6 @@
         </div>
       </div>
     </section>
-
-
-
-
-
-
   </main>
 </template>
 
@@ -137,7 +130,6 @@ const addTodo = () => {
 const removeTodo = (todo) => {
   todos.value = todos.value.filter((t) => t !== todo);
 };
-
 </script>
 
 <style></style>
